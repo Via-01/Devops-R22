@@ -1,0 +1,13 @@
+git commands to add new repository
+echo "# Devops-v-52" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Via-01/Devops-v-52.git
+git push -u origin main
+
+git commands to push an existing repository
+git remote add origin https://github.com/Via-01/Devops-v-52.git
+git branch -M main
+git push -u origin main
