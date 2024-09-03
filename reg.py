@@ -6,32 +6,30 @@ class MyForm:
         self.master = master
         master.title("My Form")
 
-        self.name_label = tk.Label(master, text="Name:")
-        self.name_label.grid(row=0, column=0)
-        self.name_entry = tk.Entry(master, width=20)
-        self.name_entry.grid(row=0, column=1)
+        self.fields = [
+            {"label": "Name:", "show": ""},
+            {"label": "Email:", "show": ""},
+            {"label": "Password:", "show": "*"}
+        ]
 
-        self.email_label = tk.Label(master, text="Email:")
-        self.email_label.grid(row=1, column=0)
-        self.email_entry = tk.Entry(master, width=20)
-        self.email_entry.grid(row=1, column=1)
+        self.entries = {}
 
-        self.password_label = tk.Label(master, text="Password:")
-        self.password_label.grid(row=2, column=0)
-        self.password_entry = tk.Entry(master, width=20, show="*")
-        self.password_entry.grid(row=2, column=1)
+        for i, field in enumerate(self.fields):
+            label = tk.Label(master, text=field["label"])
+            label.grid(row=i, column=0)
+            entry = tk.Entry(master, width=20, show=field["show"])
+            entry.grid(row=i, column=1)
+            self.entries[field["label"]] = entry
 
         self.submit_button = tk.Button(master, text="Submit", command=self.submit_form)
-        self.submit_button.grid(row=3, column=1)
+        self.submit_button.grid(row=len(self.fields), column=1)
 
     def submit_form(self):
-        name = self.name_entry.get()
-        email = self.email_entry.get()
-        password = self.password_entry.get()
+        data = {label: entry.get() for label, entry in self.entries.items()}
         print("Form submitted successfully!")
-        print("Name:", name)
-        print("Email:", email)
-        print("Password:", password)
+        print("Name :",data["Name:"])
+        print("Email :",data["Email:"])
+        print("Password :",data["Password:"])
         messagebox.showinfo("Success", "Form submitted successfully!")
 
 root = tk.Tk()
